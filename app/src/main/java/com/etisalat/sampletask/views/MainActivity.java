@@ -3,6 +3,7 @@ package com.etisalat.sampletask.views;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.LinearLayout;
 
 import com.etisalat.sampletask.R;
 import com.etisalat.sampletask.bases.BaseActivity;
@@ -15,6 +16,7 @@ import java.util.List;
 public class MainActivity extends BaseActivity implements MainActivityListener {
 
     RecyclerView recyclerView;
+    LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +43,14 @@ public class MainActivity extends BaseActivity implements MainActivityListener {
 
     @Override
     public void onError(String error) {
-        showSnackbar(error, null);
+        showSnackbar(error, linearLayout);
+        hideProgress();
     }
 
     private void initViews(){
         showProgress();
         ((MainActivityPresenter) getPresenter()).getFoodList();
         recyclerView = findViewById(R.id.lv_food_items);
+        linearLayout = findViewById(R.id.linearLayout);
     }
 }
