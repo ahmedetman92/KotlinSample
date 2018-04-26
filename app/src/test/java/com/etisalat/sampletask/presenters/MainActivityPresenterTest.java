@@ -36,7 +36,10 @@ public class MainActivityPresenterTest {
     @Test
     public void sortFoodList() throws Exception {
 
-
+        List<Item> itemsAfterSort = mainActivityPresenter.sortFoodList(prepareListToSort());
+        Object[] actual = itemsAfterSort.toArray();
+        Object[] expected = prepareExpectedSortedList().toArray();
+        Assert.assertArrayEquals(actual,expected);
     }
 
     private List<Item> prepareListToSort() {
