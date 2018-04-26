@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">SampleTask</string>
     <string name="pleasewait">Please Wait</string>
+    <string name="time_as_millis">timePreferences</string>
+    <string name="time">time</string>
+    <string name="btn_refresh_text">Refresh</string>
 </resources>

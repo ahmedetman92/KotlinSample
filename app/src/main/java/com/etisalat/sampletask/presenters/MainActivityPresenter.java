@@ -1,5 +1,6 @@
 package com.etisalat.sampletask.presenters;
 
+import com.etisalat.sampletask.bases.ApplicationContextProvider;
 import com.etisalat.sampletask.bases.BasePresenter;
 import com.etisalat.sampletask.bases.BasePresenterListener;
 import com.etisalat.sampletask.bases.network.MainActivityControllerListener;
@@ -9,11 +10,11 @@ import com.etisalat.sampletask.models.Item;
 import com.etisalat.sampletask.models.Menu;
 import com.etisalat.sampletask.views.MainActivityListener;
 
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
-
-import retrofit2.Response;
 
 /**
  * Created by Ahmed Etman on 4/25/2018.
@@ -46,6 +47,8 @@ public class MainActivityPresenter extends BasePresenter  {
                 @Override
                 public void onSaveResponse(Menu menu) {
                     CachingDataHandler.saveObject(menu);
+                    CachingDataHandler.saveLastUpdateDateTimeAsMillis(ApplicationContextProvider.getContext()
+                            ,System.currentTimeMillis());
                 }
             });
     }

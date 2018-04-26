@@ -1,5 +1,10 @@
 package com.etisalat.sampletask.models;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
+
+import com.etisalat.sampletask.R;
 import com.etisalat.sampletask.bases.ApplicationContextProvider;
 
 import java.io.File;
@@ -9,6 +14,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Ahmed Etman on 4/26/2018.
@@ -60,5 +67,18 @@ public class CachingDataHandler {
         } catch (IOException e) {
             System.out.println("Error initializing stream");
         }
+    }
+
+    public static long getDateTimeAsMillis(Context context) {
+        SharedPreferences sp = context.getSharedPreferences(
+                context.getString(R.string.time_as_millis), Activity.MODE_PRIVATE);
+        return sp.getLong(context.getString(R.string.time), System.currentTimeMillis());
+    }
+
+    public static void saveLastUpdateDateTimeAsMillis(Context context, long value) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(
+                context.getString(R.string.time_as_millis), Activity.MODE_PRIVATE).edit();
+        editor.putLong(context.getString(R.string.time), value);
+        editor.apply();
     }
 }
