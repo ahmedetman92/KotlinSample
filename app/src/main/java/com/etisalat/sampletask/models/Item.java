@@ -3,12 +3,14 @@ package com.etisalat.sampletask.models;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
+import java.io.Serializable;
+
 /**
  * Created by Ahmed Etman on 4/25/2018.
  */
 
 @Root(name = "item")
-public class Item {
+public class Item implements Serializable {
     @Element(name = "id")
     private String id;
 

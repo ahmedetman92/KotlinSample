@@ -10,4 +10,5 @@ import com.etisalat.sampletask.models.Menu;
 public interface MainActivityControllerListener extends BaseControllerListener {
     void onSuccess(Menu response);
     void onFail(String error);
+    void onSaveResponse(Menu menu);
 }

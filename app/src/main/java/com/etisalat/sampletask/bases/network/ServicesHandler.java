@@ -19,6 +19,7 @@ public class ServicesHandler extends BaseRepo {
                     public void success(Object response) {
                         Menu menu = (Menu) ((Response) response).body();
                         mainActivityControllerListener.onSuccess(menu);
+                        mainActivityControllerListener.onSaveResponse(menu);
                         Log.e("ServicesHandler",response.toString());
                     }
 

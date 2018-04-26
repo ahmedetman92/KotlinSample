@@ -3,6 +3,7 @@ package com.etisalat.sampletask.models;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -10,7 +11,7 @@ import java.util.List;
  */
 
 @Root(name = "menu")
-public class Menu {
+public class Menu implements Serializable {
     @ElementList(inline = true)
     private List<Item> item;
 

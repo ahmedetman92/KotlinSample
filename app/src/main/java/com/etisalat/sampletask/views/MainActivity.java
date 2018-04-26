@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import com.etisalat.sampletask.R;
 import com.etisalat.sampletask.bases.BaseActivity;
 import com.etisalat.sampletask.bases.BasePresenter;
+import com.etisalat.sampletask.models.CachingDataHandler;
 import com.etisalat.sampletask.models.Item;
 import com.etisalat.sampletask.presenters.MainActivityPresenter;
 
@@ -33,12 +34,7 @@ public class MainActivity extends BaseActivity implements MainActivityListener {
 
     @Override
     public void onListRetrieved(List<Item> itemsList) {
-        FoodItemsListAdapter adapter = new FoodItemsListAdapter(itemsList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-
-        hideProgress();
+        displayList(itemsList);
     }
 
     @Override
@@ -49,8 +45,21 @@ public class MainActivity extends BaseActivity implements MainActivityListener {
 
     private void initViews(){
         showProgress();
-        ((MainActivityPresenter) getPresenter()).getFoodList();
         recyclerView = findViewById(R.id.lv_food_items);
         linearLayout = findViewById(R.id.linearLayout);
+        if(CachingDataHandler.loadObject() == null){
+            ((MainActivityPresenter) getPresenter()).getFoodList();
+        }else{
+            displayList(CachingDataHandler.loadObject().getItems());
+        }
+    }
+
+    private void displayList(List<Item> itemsList){
+        FoodItemsListAdapter adapter = new FoodItemsListAdapter(itemsList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+        hideProgress();
     }
 }

@@ -20,8 +20,8 @@ public class ApiConnection {
 
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
-// add logging as last interceptor
-        httpClient.addInterceptor(logging);  // <-- this is the important line!
+        // add logging as last interceptor
+        httpClient.addInterceptor(logging);
         retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(SimpleXmlConverterFactory.create())

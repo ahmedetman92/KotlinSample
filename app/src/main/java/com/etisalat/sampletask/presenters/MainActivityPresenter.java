@@ -4,6 +4,7 @@ import com.etisalat.sampletask.bases.BasePresenter;
 import com.etisalat.sampletask.bases.BasePresenterListener;
 import com.etisalat.sampletask.bases.network.MainActivityControllerListener;
 import com.etisalat.sampletask.bases.network.ServicesHandler;
+import com.etisalat.sampletask.models.CachingDataHandler;
 import com.etisalat.sampletask.models.Item;
 import com.etisalat.sampletask.models.Menu;
 import com.etisalat.sampletask.views.MainActivityListener;
@@ -29,20 +30,24 @@ public class MainActivityPresenter extends BasePresenter  {
 
     public void getFoodList(){
         ServicesHandler servicesHandler = new ServicesHandler();
-        servicesHandler.getAllFood(new MainActivityControllerListener() {
-            @Override
-            public void onSuccess(Menu response) {
+            servicesHandler.getAllFood(new MainActivityControllerListener() {
+                @Override
+                public void onSuccess(Menu response) {
 
-                sortFoodList(response.getItems());
-                mMainActivityListener.onListRetrieved(response.getItems());
-            }
+                    sortFoodList(response.getItems());
+                    mMainActivityListener.onListRetrieved(response.getItems());
+                }
 
-            @Override
-            public void onFail(String error) {
-                mMainActivityListener.onError(error);
-            }
-        });
+                @Override
+                public void onFail(String error) {
+                    mMainActivityListener.onError(error);
+                }
 
+                @Override
+                public void onSaveResponse(Menu menu) {
+                    CachingDataHandler.saveObject(menu);
+                }
+            });
     }
 
 
