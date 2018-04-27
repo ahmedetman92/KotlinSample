@@ -2,14 +2,22 @@ package com.etisalat.sampletask.views
 
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.etisalat.sampletask.R
 import kotlinx.android.synthetic.main.activity_camera.*
+import java.util.jar.Manifest
+import com.bumptech.glide.Glide
+import java.io.ByteArrayOutputStream
 
-class CameraActivity : Activity() {
+
+class CameraActivity : AppCompatActivity() {
 
     val CAMERA_REQUEST_CODE = 0
 
@@ -20,7 +28,14 @@ class CameraActivity : Activity() {
         btn_capture.setOnClickListener() {
             val callCameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             if (callCameraIntent.resolveActivity(packageManager) != null) {
-                startActivityForResult(callCameraIntent, CAMERA_REQUEST_CODE);
+                var permissionCheck = ContextCompat.checkSelfPermission(this,
+                        android.Manifest.permission.CAMERA)
+                if(permissionCheck != PackageManager.PERMISSION_GRANTED){
+                    ActivityCompat.requestPermissions(this,
+                            arrayOf<String>(android.Manifest.permission.CAMERA),10)
+                }else {
+                    startActivityForResult(callCameraIntent, CAMERA_REQUEST_CODE);
+                }
             }
         }
     }
@@ -30,8 +45,17 @@ class CameraActivity : Activity() {
 
         when (requestCode) {
             CAMERA_REQUEST_CODE -> {
-                if(requestCode == Activity.RESULT_OK && data != null){
-                    img_thumbnail.setImageBitmap(data.extras.get("data") as Bitmap)
+                if( data != null){
+
+                    var img = data.extras.get("data") as Bitmap
+                    val stream = ByteArrayOutputStream()
+                    img.compress(Bitmap.CompressFormat.PNG, 100, stream)
+                    Glide.with(this)
+                            .load(stream.toByteArray())
+                            .asBitmap()
+                            .into(img_thumbnail)
+
+                   // img_thumbnail.setImageBitmap(img)
                 }
             }
             else -> {
