@@ -12,6 +12,10 @@ import retrofit2.Response;
 
 public class ServicesHandler extends BaseRepo {
 
+    /**
+     * getting the food list and returning it back by the call back
+     * @param mainActivityControllerListener
+     */
     public void getAllFood(final MainActivityControllerListener mainActivityControllerListener){
         execute(ApiConnection.retrofitForXML(ApiServices.BASE_URL).create(ApiServices.class).getFood(),
                 new ApiCallback() {

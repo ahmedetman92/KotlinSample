@@ -12,8 +12,12 @@ import retrofit2.Response;
 
 public class BaseRepo<T> {
 
+    /**
+     * executing retrofit api calls
+     * @param call
+     * @param apiCallBack
+     */
     protected void execute(Call<T> call, final ApiCallback apiCallBack) {
-
         if (!NetworkConnectionUtil.isNetworkAvailable()) {
             apiCallBack.error("network unavailable");
         } else {

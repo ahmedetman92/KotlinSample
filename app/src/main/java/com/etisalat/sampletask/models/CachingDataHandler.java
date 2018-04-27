@@ -23,6 +23,10 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class CachingDataHandler {
 
+    /**
+     * loading the cached menu object
+     * @return
+     */
    public static Menu loadObject(){
        Menu menu = null;
        try {
@@ -48,6 +52,10 @@ public class CachingDataHandler {
        return menu;
    }
 
+    /**
+     * caching menu object
+     * @param menu
+     */
     public static void saveObject(Menu menu){
         try {
             String filePath = ApplicationContextProvider.getContext()
@@ -69,12 +77,22 @@ public class CachingDataHandler {
         }
     }
 
+    /**
+     * getting the last updated date
+     * @param context
+     * @return
+     */
     public static long getDateTimeAsMillis(Context context) {
         SharedPreferences sp = context.getSharedPreferences(
                 context.getString(R.string.time_as_millis), Activity.MODE_PRIVATE);
         return sp.getLong(context.getString(R.string.time), System.currentTimeMillis());
     }
 
+    /**
+     * saving last updated date into shared preferences
+     * @param context
+     * @param value
+     */
     public static void saveLastUpdateDateTimeAsMillis(Context context, long value) {
         SharedPreferences.Editor editor = context.getSharedPreferences(
                 context.getString(R.string.time_as_millis), Activity.MODE_PRIVATE).edit();

@@ -14,6 +14,12 @@ public class ApiConnection {
 
 
     private static Retrofit retrofit;
+
+    /**
+     * retrofit network call to get xml data
+     * @param baseUrl
+     * @return
+     */
     public static Retrofit retrofitForXML(String baseUrl) {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);

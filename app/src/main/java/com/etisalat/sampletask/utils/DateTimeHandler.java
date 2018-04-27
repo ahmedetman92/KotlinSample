@@ -9,8 +9,12 @@ import java.util.Calendar;
 
 public class DateTimeHandler {
 
-    public static String getDate(long milliSeconds)
-    {
+    /**
+     * converting millis to date time format
+     * @param milliSeconds
+     * @return
+     */
+    public static String getDate(long milliSeconds) {
         // Create a DateFormatter object for displaying date in specified format.
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 

@@ -53,6 +53,9 @@ public class MainActivity extends BaseActivity implements MainActivityListener {
         tv_last_update.setVisibility(View.GONE);
     }
 
+    /**
+     * initializing the views
+     */
     private void initViews(){
         showProgress();
         recyclerView = findViewById(R.id.lv_food_items);
@@ -84,6 +87,9 @@ public class MainActivity extends BaseActivity implements MainActivityListener {
         getSupportActionBar().setTitle(DateTimeHandler.getDate(System.currentTimeMillis()));
     }
 
+    /**
+     * doing the refresh action to refresh list items
+     */
     private void applyRefreshAction() {
         showProgress();
         ((MainActivityPresenter) getPresenter()).getFoodList();
@@ -91,6 +97,10 @@ public class MainActivity extends BaseActivity implements MainActivityListener {
         getSupportActionBar().setTitle(DateTimeHandler.getDate(System.currentTimeMillis()));
     }
 
+    /**
+     * displaying list of items on the recycler view
+     * @param itemsList
+     */
     private void displayList(List<Item> itemsList){
         tv_last_update.setVisibility(View.VISIBLE);
         FoodItemsListAdapter adapter = new FoodItemsListAdapter(itemsList);

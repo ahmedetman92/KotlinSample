@@ -11,8 +11,13 @@ import com.etisalat.sampletask.bases.ApplicationContextProvider;
  */
 
 public class NetworkConnectionUtil {
+
+    /**
+     * checking if the network is available
+     * @return
+     */
     public static boolean isNetworkAvailable() {
-        boolean isConnected = false;
+        boolean isConnected;
 
         ConnectivityManager connectivityManager =
                 (ConnectivityManager) ApplicationContextProvider.getContext().
