@@ -34,7 +34,8 @@ public class MainActivityPresenter extends BasePresenter  {
             servicesHandler.getAllFood(new MainActivityControllerListener() {
                 @Override
                 public void onSuccess(Menu response) {
-
+                    CachingDataHandler.saveLastUpdateDateTimeAsMillis(ApplicationContextProvider.getContext()
+                            ,System.currentTimeMillis());
                     sortFoodList(response.getItems());
                     mMainActivityListener.onListRetrieved(response.getItems());
                 }
@@ -47,8 +48,6 @@ public class MainActivityPresenter extends BasePresenter  {
                 @Override
                 public void onSaveResponse(Menu menu) {
                     CachingDataHandler.saveObject(menu);
-                    CachingDataHandler.saveLastUpdateDateTimeAsMillis(ApplicationContextProvider.getContext()
-                            ,System.currentTimeMillis());
                 }
             });
     }

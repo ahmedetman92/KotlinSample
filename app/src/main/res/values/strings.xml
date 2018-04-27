@@ -4,4 +4,5 @@
     <string name="time_as_millis">timePreferences</string>
     <string name="time">time</string>
     <string name="btn_refresh_text">Refresh</string>
+    <string name="btn_capture_text">Capture</string>
 </resources>

@@ -33,7 +33,12 @@ public abstract class BaseActivity<T extends BasePresenter>
     @Override
     public void hideProgress() {
         if (progressDialog != null && progressDialog.isShowing()) {
-            progressDialog.dismiss();
+            try {
+                progressDialog.dismiss();
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
     }
 

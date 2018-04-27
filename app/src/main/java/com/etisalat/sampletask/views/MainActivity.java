@@ -1,11 +1,14 @@
 package com.etisalat.sampletask.views;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.etisalat.sampletask.R;
@@ -23,7 +26,7 @@ public class MainActivity extends BaseActivity implements MainActivityListener {
     RecyclerView recyclerView;
     LinearLayout linearLayout;
     TextView tv_last_update;
-    Button btn_refresh;
+    Button btn_refresh, btn_kotlin_activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +58,19 @@ public class MainActivity extends BaseActivity implements MainActivityListener {
         recyclerView = findViewById(R.id.lv_food_items);
         linearLayout = findViewById(R.id.linearLayout);
         tv_last_update = findViewById(R.id.tv_last_update);
-        btn_refresh= findViewById(R.id.btn_refresh);
+        btn_refresh = findViewById(R.id.btn_refresh);
+        btn_kotlin_activity = findViewById(R.id.btn_camera_activity);
+        btn_kotlin_activity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,CameraActivity.class));
+            }
+        });
+
         btn_refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                tv_last_update.setVisibility(View.GONE);
                 applyRefreshAction();
             }
         });
@@ -80,6 +92,7 @@ public class MainActivity extends BaseActivity implements MainActivityListener {
     }
 
     private void displayList(List<Item> itemsList){
+        tv_last_update.setVisibility(View.VISIBLE);
         FoodItemsListAdapter adapter = new FoodItemsListAdapter(itemsList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
