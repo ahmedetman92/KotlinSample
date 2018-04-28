@@ -25,6 +25,8 @@ class CameraActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera)
 
+        initImage()
+
         btn_capture.setOnClickListener() {
             val callCameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             if (callCameraIntent.resolveActivity(packageManager) != null) {
@@ -54,13 +56,20 @@ class CameraActivity : AppCompatActivity() {
                             .load(stream.toByteArray())
                             .asBitmap()
                             .into(img_thumbnail)
-
-                   // img_thumbnail.setImageBitmap(img)
                 }
             }
             else -> {
                 Toast.makeText(this, "Undefined request",  Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    /**
+     * display default image
+     */
+    fun initImage(){
+        Glide.with(this)
+                .load(R.mipmap.ic_launcher_round)
+                .into(img_thumbnail)
     }
 }

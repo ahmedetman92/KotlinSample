@@ -28,7 +28,9 @@ public class MainActivityPresenter extends BasePresenter  {
         mMainActivityListener = mainActivityListener;
     }
 
-
+    /**
+     * getting the retrieved list and sending it to the main activity view
+     */
     public void getFoodList(){
         ServicesHandler servicesHandler = new ServicesHandler();
             servicesHandler.getAllFood(new MainActivityControllerListener() {
@@ -53,6 +55,11 @@ public class MainActivityPresenter extends BasePresenter  {
     }
 
 
+    /**
+     * sorting the list alphabetically
+     * @param list
+     * @return
+     */
     public List<Item> sortFoodList(List<Item> list) {
         if (list.size() > 0) {
             Collections.sort(list, new Comparator<Item>() {
